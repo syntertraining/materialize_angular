@@ -1,0 +1,92 @@
+<html lang = "en">
+    <head>
+       <link rel = "stylesheet"
+          href = "https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
+       <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+       <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+       <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+       <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+       <script src = "https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
+       <link rel = "stylesheet" href = "https://fonts.googleapis.com/icon?family=Material+Icons">
+       
+       <style>
+          .closeButton {
+             position: relative;
+             height: 24px;
+             width: 24px;
+             line-height: 30px;
+             text-align: center;
+             background: rgba(0, 0, 0, 0.3);
+             border-radius: 50%;
+             border: none;
+             box-shadow: none;
+             padding: 0;
+             margin: 3px;
+             transition: background 0.15s linear;
+             display: block; 
+          }
+       </style>
+       
+       <script language = "javascript">
+          angular
+             .module('firstApplication', ['ngMaterial'])
+             .controller('chipController', chipController);
+ 
+          function chipController ($scope) {
+             var self = this;
+             self.readonly = false;
+             
+             // Lists of fruit names and Vegetable objects
+             self.fruitNames = ['Apple', 'Banana', 'Orange'];
+             self.roFruitNames = angular.copy(self.fruitNames);
+             self.tags = [];
+             
+             self.vegObjs = [
+                {
+                   'name' : 'Broccoli',
+                   'type' : 'Brassica'
+                },
+                {
+                   'name' : 'Cabbage',
+                   'type' : 'Brassica'
+                },
+                {
+                   'name' : 'Carrot',
+                   'type' : 'Umbelliferous'
+                }
+             ];
+             
+             self.newVeg = function(chip) {
+                return {
+                   name: chip,
+                   type: 'unknown'
+                };
+             };
+          }          
+       </script>      
+    </head>
+    
+    <body ng-app = "firstApplication"> 
+       <div ng-controller = "chipController as ctrl" layout = "column" ng-cloak>
+          <md-chips ng-model = "ctrl.fruitNames" readonly = "ctrl.readonly">
+             </md-chips>
+          
+          <md-chips class = "custom-chips" ng-model = "ctrl.vegObjs"
+             readonly = "ctrl.readonly" md-transform-chip = "ctrl.newVeg($chip)">
+             <md-chip-template>
+                <span>
+                   <strong>[{{$index}}] {{$chip.name}}</strong>
+                   <em>({{$chip.type}})</em>
+                </span>
+             </md-chip-template>
+          
+             <button md-chip-remove class = "md-primary closeButton">
+                <md-icon md-svg-icon = "md-close"></md-icon>
+             </button>
+          </md-chips>
+          
+          <br/>
+          <md-checkbox ng-model = "ctrl.readonly">Readonly</md-checkbox>
+       </div>
+    </body>
+ </html>

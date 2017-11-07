@@ -1,0 +1,45 @@
+<html lang = "en">
+    <head>
+       <link rel = "stylesheet"
+          href = "https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
+       <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+       <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+       <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+       <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+       <script src = "https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
+       <link rel = "stylesheet" href = "https://fonts.googleapis.com/icon?family=Material+Icons">
+       
+       <script language = "javascript">
+          angular
+             .module('firstApplication', ['ngMaterial'])
+             .controller('radioButtonsController', radioButtonsController);
+ 
+          function radioButtonsController ($scope) {
+             $scope.radioData = [
+                { label: 'Apple', value: 'Apple' },
+                { label: 'Banana', value: 'Banana' },
+                { label: 'Mango', value: 'Mango', isDisabled: true },
+                { label: 'Orange', value: 'Orange' }
+             ];
+             $scope.group = 'Banana';
+          }	  
+       </script>      
+    </head>
+    
+    <body ng-app = "firstApplication"> 
+       <div id = "radioButtonsContainer" ng-controller = "radioButtonsController as ctrl"
+          layout = "column" ng-cloak>
+          <p>Selected Value: <span>{{ group }}</span> </p>
+          
+          <md-radio-group ng-model = "group" class = "md-primary">
+             <md-radio-button ng-repeat = "d in radioData"
+                ng-value = "d.value"
+                ng-disabled = " d.isDisabled "
+                ng-class = "{'md-align-top-left': $index==1}" >
+                {{ d.label }}<br/>
+             </md-radio-button>
+          </md-radio-group>
+          
+       </div>
+    </body>
+ </html>

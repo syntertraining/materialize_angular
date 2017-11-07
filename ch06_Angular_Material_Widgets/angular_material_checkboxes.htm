@@ -1,0 +1,34 @@
+<html lang = "en">
+    <head>
+       <link rel = "stylesheet"
+          href = "https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
+       <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+       <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+       <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+       <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+       <script src = "https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
+       
+       <script language = "javascript">
+          angular
+             .module('firstApplication', ['ngMaterial'])
+             .controller('checkBoxController', checkBoxController);
+ 
+          function checkBoxController ($scope) {            
+          }  
+       </script>      
+    </head>
+    
+    <body ng-app = "firstApplication">  
+       <md-checkbox ng-model = "isChecked" aria-label = "Married">
+          Married
+       </md-checkbox>
+       
+       <md-checkbox md-no-ink ng-model = "hasInk" aria-label = "No Ink Effects">
+          Single
+       </md-checkbox>
+       
+       <md-checkbox ng-disabled = "true" ng-model = "isDisabled" aria-label = "Disabled">
+          Don't know (Disabled)
+       </md-checkbox>
+    </body>
+ </html>

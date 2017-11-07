@@ -1,0 +1,96 @@
+<html lang = "en">
+    <head>
+       <link rel = "stylesheet"
+          href = "https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
+       <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+       <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+       <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+       <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+       <script src = "https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
+       <link rel = "stylesheet" href = "https://fonts.googleapis.com/icon?family=Material+Icons">
+       
+       <script language = "javascript">
+          angular
+             .module('firstApplication', ['ngMaterial'])
+             .controller('menuController', menuController);
+ 
+          function menuController ($scope, $mdDialog) {
+             var originatorEv;
+             
+             this.openMenu = function($mdOpenMenu, ev) {
+                originatorEv = ev;
+                $mdOpenMenu(ev);
+             };
+             
+             this.menuItemClick = function(index) {
+                $mdDialog.show (
+                   $mdDialog.alert()
+                     .title('TutorialsPoint.com')
+                     .textContent('Menu Item clicked, index: ' + index)
+                     .ok('OK')
+                     .targetEvent(originatorEv)
+                );
+                originatorEv = null;
+             };
+          }                  
+       </script>      
+    </head>
+    
+    <body ng-app = "firstApplication"> 
+       <div id = "menuContainer" ng-controller = "menuController as ctrl"
+          layout = "row" ng-cloak>
+          <div layout = "column" flex = "33" flex-sm = "100"
+             layout-align = "center center">         
+             <p>Default Menu</p>
+             
+             <md-menu>
+                <md-button aria-label = "Sample Menu" class = "md-icon-button"
+                   ng-click = "$mdOpenMenu($event)">
+                   <md-icon md-menu-origin class = "material-icons">more_vert</md-icon>
+                </md-button>
+                
+                <md-menu-content width = "6">
+                   <md-menu-item ng-repeat = "item in [1, 2, 3]">
+                      <md-button ng-click = "ctrl.menuItemClick($index)">
+                         
+                         <div layout = "row">
+                            <md-icon md-menu-align-target class = "material-icons">
+                               add</md-icon>
+                            <p flex>Option {{item}}</p>
+                         </div>
+                         
+                      </md-button>
+                   </md-menu-item>
+                </md-menu-content>
+                
+             </md-menu>
+          </div>
+          
+          <div layout = "column" flex-sm = "100" flex = "33" layout-align = "center center">
+             <p>Left Aligned Menu</p>
+             <md-menu md-position-mode = "target-right target" >
+                
+                <md-button aria-label = "Sample Menu" class = "md-icon-button"
+                   ng-click = "$mdOpenMenu($event)">
+                   <md-icon md-menu-origin class = "material-icons">more_vert</md-icon>
+                </md-button>
+                
+                <md-menu-content width = "4" >
+                   <md-menu-item ng-repeat = "item in [1, 2, 3]">
+                      <md-button ng-click = "ctrl.menuItemClick($index)">
+                         
+                         <div layout = "row">
+                            <p flex>Option {{item}}</p>        
+                            <md-icon md-menu-align-target class = "material-icons">
+                               add</md-icon>					
+                         </div>
+                         
+                      </md-button>
+                   </md-menu-item>
+                </md-menu-content>
+             </md-menu>
+          </div>
+ 
+       </div>
+    </body>
+ </html>
